@@ -1,0 +1,16 @@
+# Always check out the data files with Unix-style line-endings
+ages8  text eol=lf
+colors8  text eol=lf
+complexity  text eol=lf
+debugging  text eol=lf
+dup5  text eol=lf
+let3  text eol=lf
+names10  text eol=lf
+names8  text eol=lf
+num10  text eol=lf
+num2  text eol=lf
+random20  text eol=lf
+verbs8  text eol=lf
+wordcount  text eol=lf
+words200  text eol=lf
+words5  text eol=lf
