@@ -17,6 +17,7 @@
 #                                  this software without specific prior written
 #                                  permission.
 
+import sys
 
 def cat(args):
     """concatenate files and print on the standard output"""
@@ -31,3 +32,7 @@ def cat(args):
 def tac(args):
     """concatenate and print files in reverse"""
     print("TODO: concatenate and print files in reverse")
+
+if __name__ == '__main__':
+    cat(sys.argv[1:])                # skips argv[0] of the array.
+    

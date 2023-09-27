@@ -50,8 +50,19 @@ Deliver:
 *   Explain what happens in the face of good and bad input.
     *   Write a few specific examples that occur to you, and use them later when testing.
 
+### tt.py
+* all of the function calls are the same:
+```
+if sys.argv[0] is function_name
+    call function_name and pass other sys.argv arguments to it
+elif sys.argv[0] is different_function
+    call different_function(sys.argv[other arguments])
+    etc...
+```
 ### Head
 ```
+import sys
+
 head(args, line_count)
     if line_count = 0         this will make it so that if head is called without a line specification it will print the first 10.
         line_count == 10;
@@ -62,6 +73,14 @@ head(args, line_count)
             if line <= line_count in args   if statement will prevent the file from being read past the variable line_count.
                 line += 1
         file.close()
+
+need to adjust for the adding of the sys import statement:
+
+head(args)
+    if sys.argv[4] = empty space
+        line_count == 10
+    else 
+        line_count == sys.argv[4]
 ```
 ### Grep
 ```
@@ -87,7 +106,14 @@ Deliver:
 *   [ ] Note any relevant and interesting events that happened while you wrote the code.
     *   e.g. things you learned, things that didn't go according to plan.
 
+### Head
+Implementation went well.
 
+### Grep 
+Good planning makes this go smooth.
+
+### tt.py
+So far so good, I will add the other function calls as they are designed.
 
 ## Phase 3: Testing and Debugging
 *(30% of your effort)*

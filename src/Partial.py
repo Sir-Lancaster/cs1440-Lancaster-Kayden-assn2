@@ -17,11 +17,14 @@
 #                                  this software without specific prior written
 #                                  permission.
 
+import sys
 
-def head(args, line_count):
+def head(args):
     """output the first part of files"""
-    if line_count == 0:
+    if sys.argv[4] is None:
         line_count = 10
+    else:
+        line_count = sys.argv[4]
     for filename in args:
         file = open(filename) 
         for line in file:

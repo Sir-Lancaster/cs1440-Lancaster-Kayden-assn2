@@ -36,6 +36,12 @@ if len(sys.argv) < 2:
     sys.exit(1)
 else:
     print("TODO: Determine which tool the user has invoked by examining sys.argv")
+    if sys.argv[0] == 'cat':
+        cat(sys.argv[1:])
+    elif sys.argv[0] == 'head':
+        head(sys.argv[1:])
+    elif sys.argv[0] == 'grep':
+        grep(sys.argv[1:])    
     print("TODO: Use if/elif/else to select which function to call")
     print("TODO: Call the requested tool, passing remaining arguments from sys.argv")
     print("TODO: Call usage() and exit when bad input is provided")

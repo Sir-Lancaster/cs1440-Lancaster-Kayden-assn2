@@ -17,13 +17,18 @@
 #                                  this software without specific prior written
 #                                  permission.
 
+import sys
 
-def grep(args, pattern):
+def grep(args):
     for filename in args:
         try:
             with open(filename, 'r') as file:
                 for line in file:
-                    if pattern is None or pattern in line:
+                    if sys.argv[3].isnumeric():
+                        SearchPattern = sys.argv[4]
+                    else:
+                        SearchPattern = sys.argv[3]
+                    if SearchPattern is None or SearchPattern in line:
                         print(line, end='')
         except FileNotFoundError:
             print(f"grep: {filename}: No such file or directory")
