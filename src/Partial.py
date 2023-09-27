@@ -18,9 +18,17 @@
 #                                  permission.
 
 
-def head(args):
+def head(args, line_count):
     """output the first part of files"""
-    print("TODO: output the first part of files")
+    if line_count == 0:
+        line_count = 10
+    for filename in args:
+        file = open(filename) 
+        for line in file:
+            print(line, end='')
+            if line <= line_count:   #if statement will prevent the file from being read past the variable line_count.
+                line += 1
+        file.close()
 
 
 def tail(args):

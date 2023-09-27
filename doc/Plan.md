@@ -17,6 +17,15 @@ Deliver:
 *   [ ] List all of the data that is used by the program, making note of where it comes from.
     *   Explain what form the output will take.
 *   [ ] List the algorithms that will be used (but don't write them yet).
+### Head
+* Write a function that will open a file read the specified number of lines of the file and print them to the screen, and close the file.
+* A good solution will print the number of lines from a specified file. if the number of lines is not specified, then the function will print the first 10 lines. 
+* Knowns:
+    * I know what the head command does in the command line.
+    * I can use the same function as the cat file to open and read the file. 
+    * I know how to modify the cat function to ensure the file does not read more than a specified amount.
+* I don't think that I will have many, if any, challenges with this particular function. 
+* The output will take the form of text printed to the screen. 
 
 
 ## Phase 1: Design
@@ -35,6 +44,19 @@ Deliver:
 *   Explain what happens in the face of good and bad input.
     *   Write a few specific examples that occur to you, and use them later when testing.
 
+### Head
+```
+head(args, line_count)
+    if line_count = 0         this will make it so that if head is called without a line specification it will print the first 10.
+        line_count == 10;
+    for filename in args
+        file = open(filename) 
+        for line in file
+            print(line, end='')
+            if line <= line_count in args   if statement will prevent the file from being read past the variable line_count.
+                line += 1
+        file.close()
+```
 
 ## Phase 2: Implementation
 *(15% of your effort)*
@@ -46,6 +68,9 @@ Deliver:
 *   [ ] More or less working code.
 *   [ ] Note any relevant and interesting events that happened while you wrote the code.
     *   e.g. things you learned, things that didn't go according to plan.
+
+### Head
+Implementation went well, no errors yet. 
 
 
 ## Phase 3: Testing and Debugging

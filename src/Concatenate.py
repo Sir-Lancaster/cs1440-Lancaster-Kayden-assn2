@@ -20,7 +20,12 @@
 
 def cat(args):
     """concatenate files and print on the standard output"""
-    print("TODO: concatenate files and print on the standard output")
+    for filename in args:
+        file = open(filename)  # Just let open() crash if filename is invalid
+        for line in file:
+            print(line, end='')
+        file.close()
+
 
 
 def tac(args):
