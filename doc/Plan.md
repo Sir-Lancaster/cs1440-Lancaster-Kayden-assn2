@@ -17,6 +17,9 @@ Deliver:
 *   [ ] List all of the data that is used by the program, making note of where it comes from.
     *   Explain what form the output will take.
 *   [ ] List the algorithms that will be used (but don't write them yet).
+
+
+
 ### Head
 * Write a function that will open a file read the specified number of lines of the file and print them to the screen, and close the file.
 * A good solution will print the number of lines from a specified file. if the number of lines is not specified, then the function will print the first 10 lines. 
@@ -27,6 +30,9 @@ Deliver:
 * I don't think that I will have many, if any, challenges with this particular function. 
 * The output will take the form of text printed to the screen. 
 
+### Grep
+* Write a function that will open a file and look for words that match a pattern. 
+* A good solution will be able to provide similar output to the grep command on the command line. It will require the name of the file to be opened and the pattern to be searched for.
 
 ## Phase 1: Design
 *(30% of your effort)*
@@ -57,6 +63,18 @@ head(args, line_count)
                 line += 1
         file.close()
 ```
+### Grep
+```
+def grep(args, pattern=None):
+    for filename in args:
+        try:
+            with open(filename, 'r') as file:
+                for line in file:
+                    if pattern is None or pattern in line:
+                        print(line, end='')
+        except FileNotFoundError
+            print(filename No such file or directory)
+```
 
 ## Phase 2: Implementation
 *(15% of your effort)*
@@ -69,8 +87,6 @@ Deliver:
 *   [ ] Note any relevant and interesting events that happened while you wrote the code.
     *   e.g. things you learned, things that didn't go according to plan.
 
-### Head
-Implementation went well, no errors yet. 
 
 
 ## Phase 3: Testing and Debugging

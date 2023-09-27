@@ -18,6 +18,12 @@
 #                                  permission.
 
 
-def grep(args):
-    """print lines that match patterns"""
-    print("TODO: print lines that match patterns")
+def grep(args, pattern):
+    for filename in args:
+        try:
+            with open(filename, 'r') as file:
+                for line in file:
+                    if pattern is None or pattern in line:
+                        print(line, end='')
+        except FileNotFoundError:
+            print(f"grep: {filename}: No such file or directory")
