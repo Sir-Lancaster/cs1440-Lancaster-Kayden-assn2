@@ -17,7 +17,29 @@
 #                                  this software without specific prior written
 #                                  permission.
 
+import sys
 
 def wc(files):
     """print newline, word, and byte counts for each file"""
-    print("TODO: print newline, word, and byte counts for each file")
+    for filename in files:
+        newline_count = 0
+        char_count = 0
+        word_count = 0
+
+        with open(filename) as file:
+            for line in file:
+                newline_count += 1
+                char_count += len(line)
+                word_count += len(line.split())
+
+        print("File:", filename)
+        print("Newline count:", newline_count)
+        print("Word count:", word_count)
+        print("Character count:", char_count)
+        print()
+
+        file.close()
+
+
+if __name__ == '__main__':
+    wc(sys.argv[1:])

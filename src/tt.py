@@ -42,6 +42,11 @@ else:
         head(sys.argv[1:])
     elif sys.argv[0] == 'grep':
         grep(sys.argv[1:])    
+    elif sys.argv[0] == 'wc':
+        wc(sys.argv[1:])
+
+
+    
     print("TODO: Use if/elif/else to select which function to call")
     print("TODO: Call the requested tool, passing remaining arguments from sys.argv")
     print("TODO: Call usage() and exit when bad input is provided")

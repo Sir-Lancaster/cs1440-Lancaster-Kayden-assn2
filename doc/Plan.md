@@ -34,6 +34,17 @@ Deliver:
 * Write a function that will open a file and look for words that match a pattern. 
 * A good solution will be able to provide similar output to the grep command on the command line. It will require the name of the file to be opened and the pattern to be searched for.
 
+### Word Count
+* Write a function that will open a file, count the number of newline, word and bytes in the file.
+* A good solution will be able to print the desired information to the screen without error, and will take arguments from the command line to complete the task.
+
+* Knowns:
+    * take args from the command line
+    * open a file
+    * parse through each line of a file. 
+* Unknowns:
+    * how to count newlines, or bytes of a file. 
+
 ## Phase 1: Design
 *(30% of your effort)*
 
@@ -94,6 +105,24 @@ def grep(args, pattern=None):
         except FileNotFoundError
             print(filename No such file or directory)
 ```
+### Word Count
+```
+use the cat function as a template
+wc(filename):
+    for filename in args:
+        file = open(filename)  # Just let open() crash if filename is invalid
+        for line in file:
+            newline_count += 1
+        for line in file
+            if line != white space
+                Char_count += 1
+        for line in file
+            if line == whitespace
+                Word_count +=1
+        print("the xxx count is: ", xxxx_count) # let xxxx be the name of whatever this line is counting. There will be three print lines for the different variables.
+
+        file.close()
+```
 
 ## Phase 2: Implementation
 *(15% of your effort)*
@@ -114,6 +143,9 @@ Good planning makes this go smooth.
 
 ### tt.py
 So far so good, I will add the other function calls as they are designed.
+
+### Word Count
+after tinkering with it for a little while, I was able to get it to work propperly. With the pseudocode i used in the design it did not count the number of words or characters intil i implemented the len() function.
 
 ## Phase 3: Testing and Debugging
 *(30% of your effort)*
