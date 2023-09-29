@@ -45,6 +45,14 @@ Deliver:
 * Unknowns:
     * how to count newlines, or bytes of a file. 
 
+### Sort
+* write a function that, when given a list of files, sorts them in lexical order. 
+* A good solution will be able to take command line arguments, sort the files given in lexical order, and close the file. 
+* Knowns:
+    * open a file,
+    * search for a pattern
+* unknowns:
+    * pythons built in sorting algorithms. 
 ## Phase 1: Design
 *(30% of your effort)*
 
@@ -123,6 +131,27 @@ wc(filename):
 
         file.close()
 ```
+### Sort
+```
+sort(files)
+    Initialize an empty list called "lines"
+    
+    For each filename in files
+        Initialize an empty list called "file_lines"
+        Open the file with the given filename
+        
+        For each line in the opened file
+            Append the line to the "file_lines" list
+        
+        Close the file
+        
+        Append "file_lines" to the "lines" list
+
+    Sort the "lines" list alphabetically
+    
+    For each line in the sorted "lines" list
+        Print the line to the standard output
+```
 
 ## Phase 2: Implementation
 *(15% of your effort)*
@@ -146,6 +175,9 @@ So far so good, I will add the other function calls as they are designed.
 
 ### Word Count
 after tinkering with it for a little while, I was able to get it to work propperly. With the pseudocode i used in the design it did not count the number of words or characters intil i implemented the len() function.
+
+### Sort
+implementation went perfectly. 
 
 ## Phase 3: Testing and Debugging
 *(30% of your effort)*

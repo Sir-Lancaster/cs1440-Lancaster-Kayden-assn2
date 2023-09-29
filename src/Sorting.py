@@ -17,7 +17,27 @@
 #                                  this software without specific prior written
 #                                  permission.
 
+import sys
 
 def sort(args):
     """sort lines of text files"""
-    print("TODO: sort lines of text files")
+    lines = []
+
+    # Read lines from each file and store them in the 'lines' list
+    for filename in args:
+        file_lines = []
+        with open(filename) as file:
+            for line in file:
+                file_lines.append(line)
+        lines.extend(file_lines)
+
+    # Sort the lines alphabetically
+    sorted_lines = sorted(lines)
+
+    # Print the sorted lines to the standard output
+    for line in sorted_lines:
+        print(line, end='')
+
+
+if __name__ == '__main__':
+    sort(sys.argv[1:])
