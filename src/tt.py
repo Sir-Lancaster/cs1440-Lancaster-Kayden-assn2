@@ -46,10 +46,6 @@ elif sys.argv[1] == 'sort':
     sort(sys.argv[2:])
 elif sys.argv[1] == 'tac':
     tac(sys.argv[2:])
-
-
-    
-    print("TODO: Use if/elif/else to select which function to call")
-    print("TODO: Call the requested tool, passing remaining arguments from sys.argv")
-    print("TODO: Call usage() and exit when bad input is provided")
+elif sys.argv[1] == 'tail':
+    tail(sys.argv[2:])
 

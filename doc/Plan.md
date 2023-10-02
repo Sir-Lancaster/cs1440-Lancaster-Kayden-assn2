@@ -62,6 +62,14 @@ Deliver:
 * Unknowns: 
     * How to reverse the order that the lines are printed to the screen. 
 
+### Tail
+* Write a function that will open a file and only print the last part of a file.
+* A good solution will take the arguments from the command line, open the file, print the end of the file, then close the file. 
+* knowns:
+    * Printing the contents of a file, and limiting the contents to only the first 10 lines. 
+* Unknowns:
+    * how to limit it to be only the last ten lines. 
+* I think I can use the tac reversal algorithm to reverse the lines and then print the first 10 lines of the reversed function. 
 ## Phase 1: Design
 *(30% of your effort)*
 
@@ -173,6 +181,30 @@ tac(args)
             for line in lines
                 print(lines, end = '')
             file.close()
+```
+
+### Tail
+```
+tail(args)
+    line_count = 10  # Default line count
+
+    if len(args) > 2 and args[0] == '-n'
+        try:
+            line_count = int(args[1])  # Get the line count from the command-line arguments
+        except ValueError:
+            print("Using default.")
+        args = args[2:]  # Remove the first two command-line arguments (-n and the line count)
+
+    for filename in args:
+        lines = []  # Initialize an empty list to store the last N lines
+        with open(filename) as file:
+            for line in file:
+                lines.append(line)  # Append each line to the list
+                if len(lines) > line_count:
+                    lines.pop(0)  # Remove the first line if the list exceeds N lines
+        for line in lines:
+            print(line, end='')
+
 ```
 
 ## Phase 2: Implementation

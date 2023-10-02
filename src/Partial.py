@@ -42,5 +42,21 @@ def head(args):
 
 
 def tail(args):
-    """output the last part of files"""
-    print("TODO: output the last part of files")
+    line_count = 10  # Default line count
+
+    if len(args) > 2 and args[0] == '-n':
+        try:
+            line_count = int(args[1])  # Get the line count from the command-line arguments
+        except ValueError:
+            print("Using the default line count of 10.")
+        args = args[2:]  # Remove the first two command-line arguments (-n and the line count)
+
+    for filename in args:
+        lines = []  # Initialize an empty list to store the last N lines
+        with open(filename) as file:
+            for line in file:
+                lines.append(line)  # Append each line to the list
+                if len(lines) > line_count:
+                    lines.pop(0)  # Remove the first line if the list exceeds N lines
+        for line in lines:
+            print(line, end='')
