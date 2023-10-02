@@ -52,7 +52,16 @@ Deliver:
     * open a file,
     * search for a pattern
 * unknowns:
-    * pythons built in sorting algorithms. 
+    * pythons built in sorting algorithms.
+
+### Tac
+* Write a cunction that will open a file, and print the contentents to the screen in reverse. 
+* A good solution will take the file and either store the contents in the memory, or will itterate through the file starting at the bottom and going to the top. 
+* Knowns:
+    * Opening and printing the contents of a file to the screen
+* Unknowns: 
+    * How to reverse the order that the lines are printed to the screen. 
+
 ## Phase 1: Design
 *(30% of your effort)*
 
@@ -153,6 +162,19 @@ sort(files)
         Print the line to the standard output
 ```
 
+### Tac
+```
+tac(args)
+    for filename in reversed args
+        file = open(filename)  # Just let open() crash if filename is invalid
+        with open(filename) as file
+            lines = the lines of the file
+            lines of file reversed
+            for line in lines
+                print(lines, end = '')
+            file.close()
+```
+
 ## Phase 2: Implementation
 *(15% of your effort)*
 
@@ -178,6 +200,9 @@ after tinkering with it for a little while, I was able to get it to work propper
 
 ### Sort
 implementation went perfectly. 
+
+### Tac
+The tac function appears to be working properly, but now the head() function is acting up. I will have to deal with that when i get to phase 3.
 
 ## Phase 3: Testing and Debugging
 *(30% of your effort)*

@@ -21,17 +21,24 @@ import sys
 
 def head(args):
     """output the first part of files"""
-    if sys.argv[4] is None:
-        line_count = 10
-    else:
-        line_count = sys.argv[4]
+    line_count = 10  # Default line count
+
+    if len(sys.argv) > 2 and sys.argv[1] == '-n':
+        try:
+            line_count = int(sys.argv[2])  # Get the line count from the command line arguments
+        except ValueError:
+            print("Using the default line count of 10.")
+        args = args[1:]  # Remove the first two command-line arguments (-n and the line count)
+
     for filename in args:
-        file = open(filename) 
-        for line in file:
-            print(line, end='')
-            if line <= line_count:   #if statement will prevent the file from being read past the variable line_count.
-                line += 1
-        file.close()
+        with open(filename) as file:
+            lines_read = 0
+            for line in file:
+                print(line, end='')
+                lines_read += 1
+                if lines_read >= line_count:
+                    break  # Stop reading after reaching the specified line count
+
 
 
 def tail(args):

@@ -30,9 +30,16 @@ def cat(args):
 
 
 def tac(args):
-    """concatenate and print files in reverse"""
-    print("TODO: concatenate and print files in reverse")
+    """concatenate files in reverse order and print on the standard output"""
+    for filename in reversed(args):
+        with open(filename) as file:
+            lines = file.readlines()
+            lines.reverse()
+            for line in lines:
+                print(line, end='')
 
 if __name__ == '__main__':
-    cat(sys.argv[1:])                # skips argv[0] of the array.
-    
+    if sys.argv[0] == 'cat':
+        cat(sys.argv[1:])                # skips argv[0] of the array.
+    elif sys.argv[0] == 'tac':
+        tac(sys.argv[1:])
