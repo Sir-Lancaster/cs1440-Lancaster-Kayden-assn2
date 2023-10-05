@@ -48,4 +48,7 @@ elif sys.argv[1] == 'tac':
     tac(sys.argv[2:])
 elif sys.argv[1] == 'tail':
     tail(sys.argv[2:])
-
+elif sys.argv[1] == 'cut':
+    cut(sys.argv[2:])
+elif sys.argv[1] == 'paste':
+    paste(sys.argv[2:])

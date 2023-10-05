@@ -17,10 +17,22 @@
 #                                  this software without specific prior written
 #                                  permission.
 
+import sys
 
 def cut(args):
     """remove sections from each line of files"""
-    print("TODO: remove sections from each line of files")
+    if args[0] == '-f':
+        fields = args[1].split(',')
+    else:
+        fields = ['1']
+    for filename in args[2:]:
+        file = open(filename)
+        for line in file:
+            line = line.strip()
+            parts = line.split(',')
+            selected_fields = [parts[i - 1] for i in map(int, fields)]
+            print(','.join(selected_fields))
+        file.close()
 
 
 def paste(args):

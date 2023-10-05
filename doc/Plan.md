@@ -70,6 +70,11 @@ Deliver:
 * Unknowns:
     * how to limit it to be only the last ten lines. 
 * I think I can use the tac reversal algorithm to reverse the lines and then print the first 10 lines of the reversed function. 
+
+### Cut
+* Write a function that will open a file, and extract lines from the file and print them to the screen, merging the lines together.
+* a good solution will take the commands from the command line argument and will print the expected results.
+
 ## Phase 1: Design
 *(30% of your effort)*
 
@@ -89,9 +94,9 @@ Deliver:
 ### tt.py
 * all of the function calls are the same:
 ```
-if sys.argv[0] is function_name
+if sys.argv[1] is function_name
     call function_name and pass other sys.argv arguments to it
-elif sys.argv[0] is different_function
+elif sys.argv[1] is different_function
     call different_function(sys.argv[other arguments])
     etc...
 ```
@@ -120,7 +125,7 @@ head(args)
 ```
 ### Grep
 ```
-def grep(args, pattern=None):
+def grep(args):
     for filename in args:
         try:
             with open(filename, 'r') as file:
@@ -206,6 +211,25 @@ tail(args)
             print(line, end='')
 
 ```
+### Cut
+```
+import sys
+
+def cut(args)
+    if sys.argv[0] == '-f'
+        fields = sys.argv[1].split[',']
+    else
+        fields = ['1']
+    for filename in args
+        open(filename)
+        for line in file
+            line.strip()
+            parts = line.split(',')
+            selected_fields = [parts[i - 1] for i in fields]
+            print(selected_fields organized into columns)
+        file.close()
+    
+```
 
 ## Phase 2: Implementation
 *(15% of your effort)*
@@ -236,6 +260,8 @@ implementation went perfectly.
 ### Tac
 The tac function appears to be working properly, but now the head() function is acting up. I will have to deal with that when i get to phase 3.
 
+### Cut
+I tried to get it to work several times, but ultimately had to scrap my first design and redesign another one that worked. Some things will have to be cleaned up in the testing phase. 
 ## Phase 3: Testing and Debugging
 *(30% of your effort)*
 
