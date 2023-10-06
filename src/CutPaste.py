@@ -35,6 +35,27 @@ def cut(args):
         file.close()
 
 
-def paste(args):
     """merge lines of files"""
-    print("TODO: merge lines of files")
+def paste(args):
+    # Initialize an empty list to store the lines from each file
+    lines = []
+
+    # Read lines from each file and append them to the 'lines' list
+    for file_path in args:
+        with open(file_path, 'r') as current_file:
+            current_lines = current_file.readlines()
+            lines.append(current_lines)
+
+    # Determine the maximum number of lines among all files
+    max_lines = max(len(lines[i]) for i in range(len(lines)))
+
+    # Pad shorter files with empty lines if necessary
+    for i in range(len(lines)):
+        while len(lines[i]) < max_lines:
+            lines[i].append('\n')
+
+    # Paste the lines together with a tab delimiter and print the result
+    for i in range(max_lines):
+        combined_line = '\t'.join(lines[j][i].rstrip('\n') for j in range(len(lines)))
+        print(combined_line)
+
