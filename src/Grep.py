@@ -20,15 +20,32 @@
 import sys
 
 def grep(args):
-    for filename in args:
-        try:
-            with open(filename, 'r') as file:
-                for line in file:
-                    if sys.argv[3].isnumeric():
-                        SearchPattern = sys.argv[4]
-                    else:
-                        SearchPattern = sys.argv[3]
-                    if SearchPattern is None or SearchPattern in line:
-                        print(line, end='')
-        except FileNotFoundError:
-            print(f"grep: {filename}: No such file or directory")
+    """
+    Search for a pattern in multiple files and print matching or non-matching lines based on options.
+    """
+
+    pattern = args[0]
+    option = None
+    filenames = []
+
+    if args[0] in ['-f', '-v']:
+        option = args[0]
+        pattern = args[1]
+        filenames = args[2:]
+    else:
+        filenames = args[1:]
+
+    for filename in filenames:
+        with open(filename, 'r') as file:
+            for line in file:
+                line = line.strip()
+                if option == '-f':
+                    if pattern in line:
+                        print(line)
+                elif option == '-v':
+                    if pattern not in line:
+                        print(line)
+                else:
+                    if pattern in line:
+                        print(line)
+

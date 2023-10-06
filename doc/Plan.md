@@ -106,53 +106,78 @@ elif sys.argv[1] is different_function
 ```
 ### Head
 ```
-import sys
-
-head(args, line_count)
-    if line_count = 0         this will make it so that if head is called without a line specification it will print the first 10.
-        line_count == 10;
-    for filename in args
-        file = open(filename) 
-        for line in file
-            print(line, end='')
-            if line <= line_count in args   if statement will prevent the file from being read past the variable line_count.
-                line += 1
-        file.close()
-
-need to adjust for the adding of the sys import statement:
-
 head(args)
-    if sys.argv[4] = empty space
-        line_count == 10
-    else 
-        line_count == sys.argv[4]
+    Default line count
+
+    if '-n' in args
+        n_index = args.index(-n)
+        if n_index + 1 < len(args)
+            line_count_str = args[n_index + 1]
+            if line_count_str isdigit
+                line_count = int(line_count_str)
+                args.pop(n_index)   Remove the '-n' option
+                args.pop(n_index)   Remove the line count
+            else:
+                print("Invalid usage of the -n option. Line count must be an integer. Using the default line count of 10.")
+                args.remove('-n')   Remove the '-n' option if the line count is not valid
+        else:
+            print("Invalid usage of the -n option. Line count is missing. Using the default line count of 10.")
+            args.remove(-n)   Remove the '-n' option if no line count is provided
+
+    for filename in args
+        with open(filename) as file
+            lines_read = 0
+            for line in file
+                print(line, end='')
+                lines_read += 1
+                if lines_read >= line_count
+                    break   Stop reading after reaching the specified line count
+
 ```
 ### Grep
 ```
 def grep(args):
-    for filename in args:
-        try:
-            with open(filename, 'r') as file:
-                for line in file:
-                    if pattern is None or pattern in line:
-                        print(line, end='')
-        except FileNotFoundError
-            print(filename No such file or directory)
+initialize some variables
+    pattern = args[0]
+    option = None
+    filenames = []
+
+    if args[0] in ['-f', '-v']
+        option = args[0]
+        pattern = args[1]
+        filenames = args[2:]
+    else
+        filenames = args[1:]
+
+    for filename in filenames
+        with open(filename, 'r') as file 
+            for line in file
+                line = line.strip()
+                if option == '-f'
+                    if pattern in line:
+                        print(line)
+                elif option == '-v'
+                    if pattern not in line
+                        print(line)
+                else
+                    if pattern in line
+                        print(line)
 ```
 ### Word Count
 ```
 use the cat function as a template
 wc(filename):
-    for filename in args:
-        file = open(filename)  # Just let open() crash if filename is invalid
-        for line in file:
-            newline_count += 1
-        for line in file
-            if line != white space
-                Char_count += 1
-        for line in file
-            if line == whitespace
-                Word_count +=1
+
+    for filename in files:
+        newline_count = 0
+        char_count = 0
+        word_count = 0
+        with open(filename) as file:
+            for line in file:
+                newline_count += 1
+                char_count += len(line)
+                word_count += len(line.split())
+
         print("the xxx count is: ", xxxx_count) # let xxxx be the name of whatever this line is counting. There will be three print lines for the different variables.
 
         file.close()
@@ -217,20 +242,26 @@ tail(args)
 ```
 ### Cut
 ```
-import sys
-
-def cut(args)
-    if sys.argv[0] == '-f'
-        fields = sys.argv[1].split[',']
+cut(args)
+    if args[0] == '-f'
+        fields = args[1].split(',')
     else
         fields = ['1']
-    for filename in args
-        open(filename)
+    for filename in args[2:]
+        file = open(filename)
         for line in file
-            line.strip()
+            line = line.strip()
             parts = line.split(',')
-            selected_fields = [parts[i - 1] for i in fields]
-            print(selected_fields organized into columns)
+            
+             Ensure that the indices in 'fields' are valid
+            selected_fields = []
+            for field_index in map(int, fields)
+                if 1 <= field_index <= len(parts)
+                    selected_fields.append(parts[field_index - 1])
+                else:
+                    selected_fields.append('')   Add an empty field for out-of-range indices
+            
+            print(','.join(selected_fields))
         file.close()
 ```
 ### Paste
@@ -271,7 +302,7 @@ Deliver:
     *   e.g. things you learned, things that didn't go according to plan.
 
 ### Head
-Implementation went well.
+Implementation went well. 
 
 ### Grep 
 Good planning makes this go smooth.
@@ -290,6 +321,8 @@ The tac function appears to be working properly, but now the head() function is 
 
 ### Cut
 I tried to get it to work several times, but ultimately had to scrap my first design and redesign another one that worked. Some things will have to be cleaned up in the testing phase. 
+### Paste
+I did not have as hard of a time with paste as I did with cut for some reason. With paste I didn't have to worry too much about some of the - options and just had to worry about making sure that the files were opened, or redirected correctly. Overall paste was one of my smoother ones. 
 ## Phase 3: Testing and Debugging
 *(30% of your effort)*
 
@@ -300,6 +333,13 @@ Deliver:
     *   For any bugs discovered, describe their cause and remedy.
     *   Write your test cases in plain language such that a non-coder could run them and replicate your experience.
 
+* For the test cases, I simply ran the command below. I ran each command from the ~/cs1440-assn2 directory. 
+```
+$ ./testing/FUNCTION_NAME.sh
+```
+* On the grep function when I would call it without the -f or -v option it would simply not print anything. The remedy was to put in some if statements to redefine the pattern variable so that it would know which of the args it was supposed to define as a pattern. after adding those statements it works fine. 
+* on most, if not all, of the testing errors, the problem was that I had not created conditions for the -n, -f,... options and simply had to rewrite those statements so that they would run. 
+* on cut I had not implemented anything so that if the line count index was larger than one of the files it would pad it with empty lines. 
 
 ## Phase 4: Deployment
 *(5% of your effort)*
@@ -326,15 +366,24 @@ Deliver:
 
 *   [ ] Write brief and honest answers to these questions:
     *   What parts of your program are sloppily written and hard to understand?
+        * The CutPaste.py file might be hard to understand. 
         *   Are there parts of your program which you aren't quite sure how/why they work?
+            * the for statement on line 36 in the CutPaste.py can be hard for me to understand. 
         *   If a bug is reported in a few months, how long would it take you to find the cause?
+            * Because everything is in modules I don't think it would take more than a few hours. Maybe a work day. 
     *   Will your documentation make sense to...
         *   ...anybody besides yourself?
+            * I hope so.
         *   ...yourself in six month's time?
+            * I should be able to make sense of it. ordered chaos and all that. 
     *   How easy will it be to add a new feature to this program in a year?
+        * It sould not take more than a little while to add a new function. 
     *   Will your program continue to work after upgrading...
         *   ...your computer's hardware?
+            * As long as it is run on the same version of python it should work. 
         *   ...the operating system?
+            * there should be no problem with that.
         *   ...to the next version of Python?
+            * Maybe not. It would depend on what changes are made to the next version. 
 *   [ ] Make one final commit and push your **completed** Software Development Plan to GitLab.
 *   [ ] Respond to the **Assignment Reflection Survey** on Canvas.

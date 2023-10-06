@@ -30,7 +30,15 @@ def cut(args):
         for line in file:
             line = line.strip()
             parts = line.split(',')
-            selected_fields = [parts[i - 1] for i in map(int, fields)]
+            
+            # Ensure that the indices in 'fields' are valid
+            selected_fields = []
+            for field_index in map(int, fields):
+                if 1 <= field_index <= len(parts):
+                    selected_fields.append(parts[field_index - 1])
+                else:
+                    selected_fields.append('')  # Add an empty field for out-of-range indices
+            
             print(','.join(selected_fields))
         file.close()
 

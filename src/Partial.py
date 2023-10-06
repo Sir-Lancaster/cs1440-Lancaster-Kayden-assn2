@@ -17,18 +17,27 @@
 #                                  this software without specific prior written
 #                                  permission.
 
+
 import sys
 
 def head(args):
     """output the first part of files"""
     line_count = 10  # Default line count
 
-    if len(sys.argv) > 2 and sys.argv[1] == '-n':
-        try:
-            line_count = int(sys.argv[2])  # Get the line count from the command line arguments
-        except ValueError:
-            print("Using the default line count of 10.")
-        args = args[1:]  # Remove the first two command-line arguments (-n and the line count)
+    if '-n' in args:
+        n_index = args.index('-n')
+        if n_index + 1 < len(args):
+            line_count_str = args[n_index + 1]
+            if line_count_str.isdigit():
+                line_count = int(line_count_str)
+                args.pop(n_index)  # Remove the '-n' option
+                args.pop(n_index)  # Remove the line count
+            else:
+                print("Invalid usage of the -n option. Line count must be an integer. Using the default line count of 10.")
+                args.remove('-n')  # Remove the '-n' option if the line count is not valid
+        else:
+            print("Invalid usage of the -n option. Line count is missing. Using the default line count of 10.")
+            args.remove('-n')  # Remove the '-n' option if no line count is provided
 
     for filename in args:
         with open(filename) as file:
